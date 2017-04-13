@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="con" path="org.testng.TESTNG_CONTAINER"/>
+	<classpathentry kind="lib" path="/Users/luozhongyan/Develop/MyGit/MacacaTest/libs/com.springsource.org.apache.commons.io-1.4.0.jar"/>
+	<classpathentry kind="lib" path="/Users/luozhongyan/Develop/MyGit/MacacaTest/libs/commons-beanutils-1.8.0.jar"/>
+	<classpathentry kind="lib" path="/Users/luozhongyan/Develop/MyGit/MacacaTest/libs/commons-codec-1.9.jar"/>
+	<classpathentry kind="lib" path="/Users/luozhongyan/Develop/MyGit/MacacaTest/libs/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="/Users/luozhongyan/Develop/MyGit/MacacaTest/libs/commons-lang-2.5.jar"/>
+	<classpathentry kind="lib" path="/Users/luozhongyan/Develop/MyGit/MacacaTest/libs/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="/Users/luozhongyan/Develop/MyGit/MacacaTest/libs/fastjson-1.2.15.jar"/>
+	<classpathentry kind="lib" path="/Users/luozhongyan/Develop/MyGit/MacacaTest/libs/httpclient-4.5.2.jar"/>
+	<classpathentry kind="lib" path="/Users/luozhongyan/Develop/MyGit/MacacaTest/libs/httpcore-4.4.4.jar"/>
+	<classpathentry kind="lib" path="/Users/luozhongyan/Develop/MyGit/MacacaTest/libs/json-lib-2.4-jdk15.jar"/>
+	<classpathentry kind="lib" path="/Users/luozhongyan/Develop/MyGit/MacacaTest/libs/macacaclient-2.0.7.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
