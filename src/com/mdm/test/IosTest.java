@@ -13,6 +13,14 @@ public class IosTest {
 	 
 	@BeforeSuite
 	public void BeforeSuite() throws Exception {
+		
+	}
+	
+	
+	@Test
+	public void test_case_1() throws Exception {
+		System.out.println("test case #1");
+		
 		JSONObject porps = new JSONObject();
 		porps.put("platformName", "ios");
 		porps.put("deviceName", "iPhone");
@@ -25,13 +33,6 @@ public class IosTest {
         desiredCapabilities.put("port", 3456);
         desiredCapabilities.put("desiredCapabilities", porps);
 		driver.initDriver(desiredCapabilities);
-	}
-	
-	
-	@Test
-	public void test_case_1() throws Exception {
-		System.out.println("test case #1");
-		
 		driver.elementByName("服务器地址").sendKeys("172.16.10.218");
 //		driver.elementByName("企业标识码").sendKeys("mdm");
 //		driver.elementByName("用户名").sendKeys("lzy");
@@ -63,11 +64,25 @@ public class IosTest {
         desiredCapabilities.put("desiredCapabilities", porps);
 		driver.initDriver(desiredCapabilities);
 		
+		swipeToUp();
+		swipeToUp();
 		
+	}
+	
+	public void swipeToUp() {
+		try {
+			JSONObject PhoneSize = driver.getWindowSize();
+			int width = PhoneSize.getInteger("width");
+			int height = PhoneSize.getInteger("height");
+			driver.drag(width/2, height/5*4, width/2, height/5*1, 0.5, 10);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@AfterSuite
 	public void tearDown() throws Exception {
-//		driver.quit();
+		driver.quit();
 	}
 }
