@@ -1,0 +1,15 @@
+/bin/
+.classpath
+/local.properties
+/runlog.log
+/test-output/
+/bin/
+/.project
+/uiautoResult.txt
+/build_autotest.xml
+/build.xml
+/testng-failed.xml
+/screenshot/
+/tessdata/
+/target/
+
