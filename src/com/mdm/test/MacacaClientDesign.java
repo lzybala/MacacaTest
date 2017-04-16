@@ -34,17 +34,19 @@ public class MacacaClientDesign extends MacacaClient{
 	
 	/**
 	 * 滑动界面
+	 * @return 
 	 * @throws Exception 
 	 */
-	public void swipe(double fromX, double fromY, double toX, double toY, double duration) throws Exception {
-		JSONObject params = new JSONObject();
-		params.put("fromX", fromX);
-		params.put("fromY", fromY);
-		params.put("toX", toX);
-		params.put("toY", toY);
-		params.put("duration", duration);
-		super.touch("drag", params);
-	}
+//	@Override
+//	public MacacaClient swipe(double fromX, double fromY, double toX, double toY, double duration) throws Exception {
+//		JSONObject params = new JSONObject();
+//		params.put("fromX", fromX);
+//		params.put("fromY", fromY);
+//		params.put("toX", toX);
+//		params.put("toY", toY);
+//		params.put("duration", duration);
+//		return super.touch("drag", params);
+//	}
 	
 	/**
 	 * 向上滑动界面
@@ -79,44 +81,6 @@ public class MacacaClientDesign extends MacacaClient{
 	}
 	
 	/**
-	 * 滑动查找元素
-	 * @param wayToFind	元素查找方式
-	 * @param value	元素查找值
-	 * @param direction	滑动方向
-	 * @param maxSwipeCount 最大滑动次数
-	 * @return	true: 找到元素 false: 未找到元素
-	 */
-	public boolean elementToBeExistBySwipe(GetElementWay wayToFind, String value, SwipeDirection direction, int maxSwipeCount) {
-		boolean isElementAppear = false;
-		try {
-			while (maxSwipeCount > 0) {
-				isElementAppear = elementToBeExist(wayToFind, value, 1);
-				if (isElementAppear) {
-					break;
-				}
-				switch (direction) {
-				case UP:
-					swipeToUp();
-				case DOWN:
-					swipeToDown();
-				case LEFT:
-					swipeToLeft();
-				case RIGHT:
-					swipeToRight();
-				default:
-					break;
-				}
-				maxSwipeCount--;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			isElementAppear = false;
-			Assert.fail(e.getMessage());
-		} 
-		return isElementAppear;
-	}
-	
-	/**
 	 * 等待元素出现
 	 * @param wayToFind	元素查找方式
 	 * @param value	元素查找值
@@ -138,75 +102,77 @@ public class MacacaClientDesign extends MacacaClient{
 		return flag;
 	}
 	
-
-	@Override
-	public Element elementByName(String name) throws Exception {
-		// TODO Auto-generated method stub
-		Element element = (Element)super.elementByName(name);
-		Assert.assertNotNull(element, "找不到元素: [" +name+"]");
-		return element;
+	/**
+	 * 滑动查找元素
+	 * @param wayToFind	元素查找方式
+	 * @param value	元素查找值
+	 * @param direction	滑动方向
+	 * @param maxSwipeCount 最大滑动次数
+	 * @return	true: 找到元素 false: 未找到元素
+	 */
+	public boolean elementToBeExistBySwipe(GetElementWay wayToFind, String value, SwipeDirection direction, int maxSwipeCount) {
+		boolean isElementAppear = false;
+		try {
+			while (maxSwipeCount > 0 && isElementAppear == false) {
+				isElementAppear = isElementExist(wayToFind, value);
+				System.out.println("+++++" + isElementAppear);
+				if (isElementAppear) {
+					break;
+				}
+				switch (direction) {
+				case UP:
+					swipeToUp();
+					break;
+				case DOWN:
+					swipeToDown();
+					break;
+				case LEFT:
+					swipeToLeft();
+					break;
+				case RIGHT:
+					swipeToRight();
+					break;
+				}
+				maxSwipeCount = maxSwipeCount-1;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			isElementAppear = false;
+			Assert.fail(e.getMessage());
+		} 
+		return isElementAppear;
 	}
 
-	@Override
-	public Element elementByXPath(String xpath) throws Exception {
-		// TODO Auto-generated method stub
-		Element element = (Element)super.elementByXPath(xpath);
-		Assert.assertNotNull(element, "找不到元素: [" +xpath+"]");
-		return element;
-	}
-	
-	
-	
 //	@Override
-//	public MacacaClient waitForElement(String using, String value) throws Exception {
-//		// default timeout:2000, default interval:200
-//		return waitForElement(using, value, waitElementTimeout, waitElementTimeInterval);
-//	}
-//	
-//	@Override
-//	public JSONObject getWindowSize() throws Exception {
+//	public Element elementByName(String name) throws Exception {
 //		// TODO Auto-generated method stub
-//		JSONObject size = super.getWindowSize();
-//		int i = 5;
-//		while(size.isEmpty() && i>0){
-//			size = super.getWindowSize();
-//			Thread.sleep(500);
-//			i--;
-//		}
-//		if(size.isEmpty() && i == 0)
-//			Assert.fail("获取手机屏幕Size为空！");
-//		
-//		return size;
+//		Element element = (Element)super.elementByName(name);
+//		Assert.assertTrue(element != null && element.isDisplayed(), "找不到元素: [" +name+"]");
+//		return element;
 //	}
 //
 //	@Override
-//	public MacacaClient waitForElement(String using,String value,int timeout,int interval) throws Exception {
-//		JSONObject jsonObject = new JSONObject();
-//		jsonObject.put("value", value);
-//		jsonObject.put("using", using);
-//		int count = 1;
-//		int timeLeft = timeout;
-//		boolean satisfied = false;
-//		while (timeLeft > 0) {
-//			boolean elementExist = false;
-//			System.out.println(String.format("attempt to search the element for %d times", count++));
-//			elementExist = this.isElementExist(using, value);
-//			if (!elementExist) {
-//				// not find element ,keep searching
-//				this.sleep(interval);
-//				timeLeft -= interval;
-//			} else {
-//				// finded , break
-//				satisfied = true;
-//				break;
-//			}
-//		}
-//		if (satisfied == false) {
-//			System.out.println("can't find the element: " + using + ":" + value);
-//			return null;
-//		}
-//		
-//		return this;
+//	public Element elementByXPath(String xpath) throws Exception {
+//		// TODO Auto-generated method stub
+//		Element element = (Element)super.elementByXPath(xpath);
+//		Assert.assertTrue(element != null && element.isDisplayed(), "找不到元素: [" +xpath+"]");
+//		return element;
 //	}
 	
+	@Override
+	public JSONObject getWindowSize() throws Exception {
+		// TODO Auto-generated method stub
+		JSONObject size = super.getWindowSize();
+		int i = 5;
+		while(size.isEmpty() && i>0){
+			size = super.getWindowSize();
+			Thread.sleep(500);
+			i--;
+		}
+		if(size.isEmpty() && i == 0)
+			Assert.fail("获取手机屏幕Size为空！");
+		
+		return size;
+	}
+
 }
